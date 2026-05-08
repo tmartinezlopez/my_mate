@@ -1,0 +1,135 @@
+Quiero desarrollar una aplicación web personal tipo “ERP personal modular”, de uso privado, no comercial por ahora.
+
+Objetivo principal:
+Crear una PWA responsive, mobile-first, usable desde iPhone, Android y PC, con coste gratuito o muy bajo. No quiero publicar una app nativa al principio ni depender de App Store. La app debe poder instalarse desde el navegador en la pantalla de inicio del móvil.
+
+Stack preferido:
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Supabase como backend
+- PostgreSQL
+- Autenticación con Supabase Auth
+- Arquitectura modular y escalable
+
+Concepto del producto:
+Una app personal para organizar mi día, mis tareas, mi calendario y mis entrenamientos de gimnasio. No quiero replicar Notion ni Hevy, sino construir funcionalidades parecidas pero adaptadas a mi uso personal.
+
+Módulos iniciales:
+1. Dashboard diario
+2. Gestión de tareas
+3. Calendario simple
+4. Gestor de gimnasio
+
+Requisitos generales:
+- Diseño mobile-first.
+- Interfaz limpia, rápida y sencilla.
+- Navegación cómoda desde móvil.
+- Sidebar o navegación inferior según dispositivo.
+- Código organizado por módulos.
+- Preparado para añadir futuros módulos.
+- Autenticación básica para uso personal.
+- Base de datos clara y fácil de evolucionar.
+- PWA instalable.
+- Modo oscuro si no complica demasiado.
+- Evitar complejidad innecesaria.
+
+Funcionalidades MVP:
+
+Módulo Dashboard:
+- Mostrar resumen del día.
+- Tareas pendientes de hoy.
+- Próximo entrenamiento o rutina sugerida.
+- Accesos rápidos a tareas y gimnasio.
+
+Módulo Tareas:
+- Crear, editar y eliminar tareas.
+- Campos: título, descripción, estado, prioridad, fecha límite, proyecto opcional.
+- Estados: pendiente, en progreso, completada.
+- Filtros por estado, fecha y prioridad.
+- Vista simple de tareas de hoy.
+- Preparar estructura para tareas recurrentes, aunque no hace falta implementarlo todo al principio.
+
+Módulo Calendario:
+- Vista mensual o semanal simple.
+- Mostrar tareas con fecha.
+- Poder seleccionar un día y ver sus tareas.
+- De momento no hace falta integración con Google Calendar.
+
+Módulo Gimnasio:
+- Crear ejercicios.
+- Crear rutinas.
+- Añadir ejercicios a una rutina.
+- Registrar entrenamiento.
+- Registrar series con peso, repeticiones y notas.
+- Ver historial por ejercicio.
+- Preparar estructura para progresión futura.
+
+Modelo de datos inicial sugerido:
+- profiles
+- projects
+- tasks
+- exercises
+- workout_routines
+- workout_routine_exercises
+- workout_sessions
+- workout_sets
+
+Planificación del desarrollo:
+
+Fase 1 — Base del proyecto:
+- Crear proyecto Next.js con TypeScript.
+- Configurar Tailwind.
+- Configurar estructura de carpetas modular.
+- Configurar Supabase.
+- Crear variables de entorno.
+- Crear layout principal.
+- Crear navegación responsive.
+- Configurar PWA básica.
+
+Fase 2 — Autenticación:
+- Login.
+- Logout.
+- Protección de rutas.
+- Perfil básico de usuario.
+
+Fase 3 — Dashboard:
+- Página principal.
+- Resumen diario.
+- Tareas de hoy.
+- Acceso rápido a iniciar entrenamiento.
+
+Fase 4 — Tareas:
+- CRUD de tareas.
+- Filtros básicos.
+- Vista de tareas por día.
+- Estados y prioridades.
+
+Fase 5 — Calendario:
+- Vista calendario simple.
+- Mostrar tareas por fecha.
+- Vista detalle del día.
+
+Fase 6 — Gimnasio:
+- CRUD de ejercicios.
+- CRUD de rutinas.
+- Registro de entrenamientos.
+- Historial básico.
+
+Fase 7 — Pulido:
+- Responsive final.
+- PWA instalable.
+- Modo oscuro.
+- Limpieza de código.
+- Mejoras de UX móvil.
+
+Quiero que primero generes:
+1. Una propuesta de arquitectura de carpetas.
+2. El esquema SQL inicial para Supabase.
+3. Un roadmap técnico por fases.
+4. Una primera implementación base del proyecto.
+5. Componentes iniciales reutilizables.
+6. Una lista de decisiones técnicas importantes y por qué tomarlas.
+
+Prioriza simplicidad, mantenibilidad y coste cero.
+No sobreingenierizar.
