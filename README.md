@@ -1,110 +1,81 @@
-# Personal ERP PWA (MVP)
+# My Mate
 
-Aplicaci�n web personal modular (privada) con Next.js + Supabase.
+> Plataforma personal tipo ERP para organizar tareas, calendario, entrenamientos y seguimiento diario desde una sola app web.
 
-## 1) Propuesta de arquitectura de carpetas
+## Resumen
+
+My Mate es una aplicacion privada pensada para centralizar la gestion personal en modulos simples y escalables. El proyecto esta orientado a uso real en movil y escritorio, con autenticacion, datos persistentes y base tecnica preparada para crecer.
+
+## Que incluye hoy
+
+- Autenticacion con Supabase (magic link)
+- Area privada protegida por middleware
+- Modulos iniciales:
+  - Dashboard
+  - Tasks
+  - Calendar
+  - Gym
+  - Profile
+- Layout responsive (sidebar en desktop y navegacion inferior en movil)
+- PWA instalable (manifest + service worker base)
+- Base de datos con RLS y migracion inicial
+
+## Stack tecnico
+
+- **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS
+- **Backend/Data:** Supabase (Auth + Postgres + RLS)
+- **Tooling:** ESLint, TypeScript, PostCSS
+
+## Estructura del proyecto
 
 ```txt
-app/
-  (auth)/login/page.tsx
-  (app)/
-    dashboard/page.tsx
-    tasks/page.tsx
-    calendar/page.tsx
-    gym/page.tsx
-    layout.tsx
-  api/auth/callback/route.ts
-  globals.css
-  layout.tsx
-  page.tsx
-components/
-  layout/app-nav.tsx
-  modules/
-    dashboard/*
-    tasks/*
-    calendar/*
-    gym/*
-  ui/
-    button.tsx
-    card.tsx
-    theme-provider.tsx
-features/
-  tasks/
-  calendar/
-  gym/
-lib/
-  supabase/
-    client.ts
-    server.ts
-  utils/cn.ts
-types/
-  task.ts
-public/
-  manifest.webmanifest
-  sw.js
-supabase/
-  migrations/20260508_initial_schema.sql
+app/           Rutas, layouts y paginas
+components/    UI reutilizable y modulos de interfaz
+features/      Logica por dominio
+lib/           Utilidades y clientes compartidos (Supabase, helpers)
+styles/        Estilos globales
+supabase/      Migraciones SQL
+types/         Tipos de dominio
+public/        Recursos estaticos y PWA
 ```
 
-## 2) Esquema SQL inicial para Supabase
+## Puesta en marcha
 
-El esquema completo est� en [supabase/migrations/20260508_initial_schema.sql](supabase/migrations/20260508_initial_schema.sql).
+```bash
+npm install
+cp .env.example .env.local
+# Completar variables de Supabase en .env.local
+npm run dev
+```
 
-Incluye:
-- `profiles`
-- `projects`
-- `tasks`
-- `exercises`
-- `workout_routines`
-- `workout_routine_exercises`
-- `workout_sessions`
-- `workout_sets`
-- RLS activado y pol�ticas por `auth.uid()`
-- trigger de `updated_at`
+App local: `http://localhost:3000`
 
-## 3) Roadmap t�cnico por fases
+## Scripts disponibles
 
-1. Fase 1 (Base): estructura modular, Tailwind, Supabase SSR, PWA b�sica, navegaci�n responsive.
-2. Fase 2 (Auth): login con magic link, logout, middleware de protecci�n, perfil editable.
-3. Fase 3 (Dashboard): resumen del d�a con queries reales (tareas de hoy + pr�ximo entreno).
-4. Fase 4 (Tareas): CRUD completo, filtros persistentes (query params), vista "hoy".
-5. Fase 5 (Calendario): vista mensual simple, selector de d�a, tareas por fecha.
-6. Fase 6 (Gym): CRUD ejercicios/rutinas, sesi�n y sets, historial por ejercicio.
-7. Fase 7 (Pulido): dark mode fino, UX m�vil, rendimiento, validaciones y tests.
+```bash
+npm run dev        # Desarrollo
+npm run build      # Build de produccion
+npm run start      # Ejecutar build
+npm run lint       # Lint
+npm run typecheck  # Chequeo de tipos
+```
 
-## 4) Primera implementaci�n base
+## Base de datos
 
-Estado actual implementado:
-- Proyecto Next.js (App Router) con TypeScript + Tailwind configurado.
-- Estructura por m�dulos lista para escalar.
-- Supabase cliente servidor/navegador + middleware de rutas protegidas.
-- Login b�sico por magic link.
-- Layout responsive con sidebar desktop + bottom nav m�vil.
-- PWA instalable (manifest + service worker base).
-- P�ginas iniciales: Dashboard, Tareas, Calendario y Gym (stubs funcionales).
+La migracion inicial se encuentra en:
 
-## 5) Componentes iniciales reutilizables
+- `supabase/migrations/20260508_initial_schema.sql`
 
-- UI base: `Button`, `Card`, `ThemeProvider`
-- Layout: `AppNav`
-- M�dulo dashboard: `DashboardSummary`, `TodayTasksCard`, `QuickActions`
-- M�dulo tareas: `TaskFilters`, `TasksList`
-- M�dulo calendario: `CalendarView`
-- M�dulo gimnasio: `GymOverview`
+Incluye entidades base para perfiles, proyectos, tareas y entrenamiento, con politicas de seguridad por usuario (RLS).
 
-## 6) Decisiones t�cnicas clave
+## Roadmap (alto nivel)
 
-1. App Router + route groups: separa auth y app privada sin complejidad extra.
-2. Supabase SSR (`@supabase/ssr`): auth m�s robusta en server y middleware.
-3. RLS desde inicio: seguridad real incluso en app personal.
-4. M�dulos por dominio (`components/modules` + `features`): escalado simple.
-5. Mobile-first con bottom nav: uso principal c�modo en m�vil.
-6. PWA m�nima propia (sin plugins complejos): menor fricci�n y coste cero.
-7. Tipos de dominio b�sicos en `types/`: evoluci�n gradual sin sobrearquitectura.
+1. Completar CRUD de tareas y filtros avanzados
+2. Mejorar calendario con mas vistas y eventos
+3. Evolucionar modulo Gym (rutinas, sesiones, historial)
+4. Pulido UX mobile-first + rendimiento
+5. Cobertura de testing y validaciones
 
-## Arranque local
+## Estado del proyecto
 
-1. Copiar `.env.example` a `.env.local`
-2. Rellenar claves de Supabase
-3. `npm install`
-4. `npm run dev`
+MVP funcional en progreso, con arquitectura modular y base tecnica solida para iterar rapido.
