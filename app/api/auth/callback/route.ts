@@ -1,5 +1,15 @@
-export const dynamic = "force-dynamic";
+import { NextResponse } from "next/server";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
-export default async function AuthCallbackPage() {
-  return <p className="p-6 text-sm">Procesando autenticación...</p>;
+export async function GET(request: Request) {
+  const { searchParams, origin } = new URL(request.url);
+  const code = searchParams.get("code");
+  const next = searchParams.get("next") ?? "/dashboard";
+
+  if (code) {
+    const supabase = await createServerSupabaseClient();
+    await supabase.auth.exchangeCodeForSession(code);
+  }
+
+  return NextResponse.redirect(`${origin}${next}`);
 }

@@ -1,15 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import type { Route } from "next";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Dumbbell, LayoutDashboard, SquareCheck } from "lucide-react";
+import type { ComponentType } from "react";
+import { CalendarDays, Dumbbell, LayoutDashboard, SquareCheck, UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
-const items = [
+const items: Array<{ href: Route; label: string; icon: ComponentType<{ className?: string }> }> = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/tasks", label: "Tareas", icon: SquareCheck },
   { href: "/calendar", label: "Calendario", icon: CalendarDays },
-  { href: "/gym", label: "Gym", icon: Dumbbell }
+  { href: "/gym", label: "Gym", icon: Dumbbell },
+  { href: "/profile", label: "Perfil", icon: UserCircle }
 ];
 
 export function AppNav() {
@@ -38,8 +41,8 @@ export function AppNav() {
         </nav>
       </aside>
 
-      <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-card p-2 md:hidden">
-        <ul className="grid grid-cols-4 gap-1">
+      <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-card p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] md:hidden">
+        <ul className="grid grid-cols-5 gap-1">
           {items.map(({ href, label, icon: Icon }) => {
             const active = pathname.startsWith(href);
             return (
@@ -47,7 +50,7 @@ export function AppNav() {
                 <Link
                   href={href}
                   className={cn(
-                    "flex flex-col items-center rounded-lg px-2 py-1 text-[11px]",
+                    "flex min-h-14 flex-col items-center justify-center rounded-lg px-2 py-1 text-[11px]",
                     active ? "text-primary" : "text-foreground/70"
                   )}
                 >
